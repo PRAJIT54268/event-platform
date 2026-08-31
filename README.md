@@ -30,6 +30,20 @@ A full-stack, production-ready workshop registration and payment platform built 
 
 *Note: The webhook is the absolute source of truth for payment success, ensuring that users cannot bypass payment by manually navigating to the success URL.*
 
+Below are some of the screenshots of the website, it is deployed but since I don't have a custom domain, hence no other email will recieve the link on mail:- 
+
+
+<img width="488" height="282" alt="Screenshot 2026-08-31 225504" src="https://github.com/user-attachments/assets/4ad17088-3657-4004-b9c3-04a085d4edd9" />
+
+<img width="539" height="398" alt="Screenshot 2026-08-31 225546" src="https://github.com/user-attachments/assets/e7661c93-f803-431c-aa12-d30492f500fe" />
+
+<img width="524" height="299" alt="Screenshot 2026-08-31 224854" src="https://github.com/user-attachments/assets/b5508b30-3c4a-4892-8bcf-2717bb225797" />
+
+<img width="575" height="269" alt="Screenshot 2026-08-31 224746" src="https://github.com/user-attachments/assets/235a55a6-142d-4964-b509-b942a6f069d7" />
+
+<img width="458" height="239" alt="Screenshot 2026-08-31 224649" src="https://github.com/user-attachments/assets/df508754-127a-49ac-a631-1140f1c0d071" />
+
+
 ## 💻 Getting Started (Local Development)
 
 ### 1. Clone & Install Dependencies
