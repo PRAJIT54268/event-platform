@@ -2,12 +2,43 @@
 
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
-
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 
 function LoginButtons() {
   const params = useSearchParams();
   const callbackUrl = params.get("callbackUrl") || "/dashboard";
+  const verify = params.get("verify");
+
+  const [email, setEmail] = useState("");
+  const [emailSent, setEmailSent] = useState(!!verify);
+  const [loading, setLoading] = useState(false);
+
+  const handleEmailSignIn = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setLoading(true);
+    await signIn("email", { email, callbackUrl, redirect: false });
+    setEmailSent(true);
+    setLoading(false);
+  };
+
+  if (emailSent) {
+    return (
+      <div className="card" style={{ textAlign: "center", padding: "2rem" }}>
+        <h2 style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>Check your email ✉️</h2>
+        <p className="subtitle">
+          We sent a magic link to your inbox. Click it to sign in.
+        </p>
+        <button
+          className="oauth-btn"
+          style={{ marginTop: "1rem" }}
+          onClick={() => setEmailSent(false)}
+        >
+          Try a different method
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="oauth-list">
@@ -15,6 +46,37 @@ function LoginButtons() {
         <GitHubIcon />
         Continue with GitHub
       </button>
+
+      <div style={{ display: "flex", alignItems: "center", gap: "1rem", margin: "1rem 0" }}>
+        <hr style={{ flex: 1, border: "none", borderTop: "1px solid #ddd" }} />
+        <span style={{ color: "#999", fontSize: "0.85rem" }}>or</span>
+        <hr style={{ flex: 1, border: "none", borderTop: "1px solid #ddd" }} />
+      </div>
+
+      <form onSubmit={handleEmailSignIn} style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+        <input
+          type="email"
+          placeholder="you@example.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          style={{
+            padding: "0.75rem 1rem",
+            borderRadius: "6px",
+            border: "1px solid #ddd",
+            fontSize: "1rem",
+            outline: "none",
+          }}
+        />
+        <button
+          type="submit"
+          disabled={loading}
+          className="oauth-btn"
+          style={{ justifyContent: "center" }}
+        >
+          {loading ? "Sending..." : "Continue with Email"}
+        </button>
+      </form>
     </div>
   );
 }
@@ -25,7 +87,7 @@ export default function LoginPage() {
       <div className="eyebrow">Workshop Registration</div>
       <h1>Sign in to register</h1>
       <p className="subtitle">
-        No password to remember — continue with your GitHub account.
+        No password to remember — use your GitHub account or a magic email link.
       </p>
 
       <Suspense fallback={<div style={{ textAlign: "center", marginTop: "1rem" }}>Loading...</div>}>
