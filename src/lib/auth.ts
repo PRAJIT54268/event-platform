@@ -20,6 +20,7 @@ export const authOptions: AuthOptions = {
     GitHubProvider({
       clientId: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+      allowDangerousEmailAccountLinking: true,
     }),
     EmailProvider({
       from: process.env.EMAIL_FROM || "Workshop Team <onboarding@resend.dev>",
