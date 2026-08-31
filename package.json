@@ -10,7 +10,8 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
-    "seed:admin": "node scripts/make-admin.js"
+    "seed:admin": "node scripts/make-admin.js",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@babel/runtime": "^8.0.0",
